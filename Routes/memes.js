@@ -1,11 +1,12 @@
 const Meme = require('../Models/Meme')
 
 //potem skasować: to example
-const makeMeme = async () => {
+const makeMeme = async (link,author,title) => {
     const meme = new Meme({
-        Link: "www.bing.com",
-        author: "JA",
-        title: "what makes meeeeemeeeee noise? meep!",
+        Link: link,
+        author: author,
+        likes: 0,
+        title: title,
     })
     try {
     const result = await meme.save()

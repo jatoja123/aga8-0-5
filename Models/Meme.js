@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const joi = require('@hapi/joi')
 
 const memeSchema = mongoose.Schema({
     Link: {
@@ -17,12 +18,22 @@ const memeSchema = mongoose.Schema({
     },
     title:{
         type: String,
-        minLength: 2,
-        maxLength:40
+        minLength: 3,
+        maxLength:30,
     },
     
 });
 
 const Meme = mongoose.model('Meme', memeSchema);
 
-module.exports = Meme;
+const validateMeme = (meme) => {
+    const schema = joi.object({
+        Link: joi.string().min(7).required(),
+        author: joi.string().required(), //do zmiany -> user
+        likes: joi.number().min(0).default(0),
+        title: joi.string().min(3).max(30)
+    })
+}
+
+exports.Meme = Meme
+exports.validate = validateMeme
