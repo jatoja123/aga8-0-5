@@ -9,7 +9,7 @@ const meme = require('./routes/memes')
 
 //middleware
 app.use(express.json())
-app.use('/api/meme',meme)
+app.use('/api/memes',meme)
 
 //mongoose
 mongoose.connect(process.env.DB,{useNewUrlParser: true})
