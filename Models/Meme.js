@@ -21,7 +21,10 @@ const memeSchema = mongoose.Schema({
         minLength: 3,
         maxLength:30,
     },
-    
+    date: {
+        type: date,
+        default: Date.now,
+    },
 });
 
 const Meme = mongoose.model('Meme', memeSchema);
@@ -33,6 +36,7 @@ const validateMeme = (meme) => {
         likes: joi.number().min(0).default(0),
         title: joi.string().min(3).max(30)
     })
+    return schema.validate(meme)
 }
 
 exports.Meme = Meme

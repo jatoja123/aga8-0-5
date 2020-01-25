@@ -1,20 +1,18 @@
 const {Meme,validate} = require('../Models/Meme');
 const express = require('express')
 
-//potem skasować: to example
-const makeMeme = async (link,author,title) => {
-    const meme = new Meme({
-        Link: link,
-        author: author,
-        likes: 0,
-        title: title,
-    })
-    try {
-    const result = await meme.save()
-    }
-    catch (error){
-        console.log(error)
-    }
-}
+const router = express.Router()
 
-module.exports = makeMeme;
+router.get('/',(req,res)=> {
+    const memes = Meme.find().sort({date:1})
+    res.send(memes)
+})
+
+//dla chętnych dopisac routa dla jednego mema
+
+router.post('/',(req,res) => {
+    const {error} = validate(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+})
+
+module.exports = router
