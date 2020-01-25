@@ -1,4 +1,5 @@
-const Meme = require('../Models/Meme')
+const {Meme,validate} = require('../Models/Meme');
+const express = require('express')
 
 //potem skasować: to example
 const makeMeme = async (link,author,title) => {
